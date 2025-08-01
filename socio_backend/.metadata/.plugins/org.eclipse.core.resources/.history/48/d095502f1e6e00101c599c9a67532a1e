@@ -1,0 +1,11 @@
+package com.media.response;
+
+public class ApiResponse {
+
+	private String message;
+	private boolean status;
+
+	public ApiResponse() {
+
+	}
+}
