@@ -1,9 +1,10 @@
 package com.media.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.media.models.User;
+import com.media.dto.UserDto;
 import com.media.repository.UserRepository;
 import com.media.service.UserService;
 
@@ -27,63 +28,67 @@ public class UserController {
 	UserService userService;
 
 	@PostMapping("/users")
-	public User createUser(@RequestBody User user) {
+	public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto) {
 
-		User savedUser = userService.registerUser(user);
-		return savedUser;
-	}
-
-	@GetMapping("/users")
-	public List<User> getUsers() {
-
-		List<User> users = userRepository.findAll();
-		return users;
-
+		UserDto savedUser = userService.registerUser(userDto);
+		return new ResponseEntity<UserDto>(savedUser, HttpStatus.ACCEPTED);
 	}
 
 	@GetMapping("/users/{userid}")
-	public User getUserById(@PathVariable("userid") Integer id) throws Exception {
-		User user = userService.findUserById(id);
+	public ResponseEntity<UserDto> getUserById(@PathVariable("userid") Integer id) throws Exception {
+		UserDto userDto = userService.findUserById(id);
 
-		return user;
+		// return new ResponseEntity<UserDto>(userDto, HttpStatus.OK);
+		return ResponseEntity.ok(userDto);
+
 	}
 
-	@PutMapping("/users/{userId}")
-	public User updateUser(@RequestBody User user, @PathVariable("userId") Integer id) throws Exception {
+	@GetMapping("/users")
+	public ResponseEntity<List<UserDto>> getUsers() {
 
-		User updatedUser = userService.updateUser(user, id);
+		List<UserDto> usersDto = userService.getAllUsers();
+		return ResponseEntity.ok(usersDto);
 
-		return updatedUser;
+	}
 
+	@GetMapping("/users/email/{email}")
+	public ResponseEntity<UserDto> getUserByEmail(@PathVariable String email) throws Exception {
+
+		return ResponseEntity.ok(userService.findUserByEmail(email));
 	}
 
 	@PutMapping("/users/follow/{userId1}/{userId2}")
-	public User followUserHandler(@PathVariable Integer userId1, @PathVariable Integer userId2) throws Exception {
+	public ResponseEntity<UserDto> followUserHandler(@PathVariable Integer userId1, @PathVariable Integer userId2)
+			throws Exception {
 
-		User user = userService.followUser(userId1, userId2);
+		UserDto userDto = userService.followUser(userId1, userId2);
 
-		return user;
+		return ResponseEntity.ok(userDto);
+	}
+
+	@PutMapping("/users/{userId}")
+	public ResponseEntity<UserDto> updateUser(@RequestBody UserDto user, @PathVariable("userId") Integer id)
+			throws Exception {
+
+		UserDto updatedUser = userService.updateUser(user, id);
+
+		return ResponseEntity.ok(updatedUser);
+
 	}
 
 	@GetMapping("/users/search")
-	public List<User> searchUser(@RequestParam("query") String query) {
+	public ResponseEntity<List<UserDto>> searchUser(@RequestParam("query") String query) {
 
-		List<User> users = userService.searchUser(query);
+		List<UserDto> usersDto = userService.searchUser(query);
 
-		return users;
+		return ResponseEntity.ok(usersDto);
 	}
 
-	@DeleteMapping("/users/{userId}")
-	public String deleteUser(@PathVariable Integer userId) throws Exception {
+	@DeleteMapping("/users/delete/{userId}")
+	public ResponseEntity<String> deleteUser(@PathVariable Integer userId) throws Exception {
+		userService.deleteUser(userId);
 
-		Optional<User> user1 = userRepository.findById(userId);
-
-		if (user1.isEmpty())
-			throw new Exception("User not exists with userid " + userId);
-
-		userRepository.deleteById(userId);
-
-		return "user deleted successfully with id " + userId;
+		return ResponseEntity.ok("Employee Deleted");
 	}
 
 }
