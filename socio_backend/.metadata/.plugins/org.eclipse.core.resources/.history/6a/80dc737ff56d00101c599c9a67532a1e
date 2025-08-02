@@ -1,8 +1,0 @@
-package com.media.models;
-
-import jakarta.persistence.Entity;
-
-@Entity
-public class Post {
-	
-}

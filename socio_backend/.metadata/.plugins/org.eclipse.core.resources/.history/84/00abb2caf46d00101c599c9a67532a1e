@@ -1,6 +1,0 @@
-package com.media.service;
-
-public interface Postservice {
-
-	
-}

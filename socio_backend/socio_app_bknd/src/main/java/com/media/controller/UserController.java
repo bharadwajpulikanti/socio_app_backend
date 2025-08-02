@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.media.dto.UserDto;
+import com.media.models.User;
 import com.media.repository.UserRepository;
 import com.media.service.UserService;
 
@@ -28,63 +28,63 @@ public class UserController {
 	UserService userService;
 
 	@PostMapping("/users")
-	public ResponseEntity<UserDto> createUser(@RequestBody UserDto userDto) {
+	public ResponseEntity<User> createUser(@RequestBody User User) {
 
-		UserDto savedUser = userService.registerUser(userDto);
-		return new ResponseEntity<UserDto>(savedUser, HttpStatus.ACCEPTED);
+		User savedUser = userService.registerUser(User);
+		return new ResponseEntity<User>(savedUser, HttpStatus.ACCEPTED);
 	}
 
-	@GetMapping("/users/{userid}")
-	public ResponseEntity<UserDto> getUserById(@PathVariable("userid") Integer id) throws Exception {
-		UserDto userDto = userService.findUserById(id);
+	@GetMapping("/api/users/{userid}")
+	public ResponseEntity<User> getUserById(@PathVariable("userid") Integer id) throws Exception {
+		User User = userService.findUserById(id);
 
-		// return new ResponseEntity<UserDto>(userDto, HttpStatus.OK);
-		return ResponseEntity.ok(userDto);
-
-	}
-
-	@GetMapping("/users")
-	public ResponseEntity<List<UserDto>> getUsers() {
-
-		List<UserDto> usersDto = userService.getAllUsers();
-		return ResponseEntity.ok(usersDto);
+		// return new ResponseEntity<User>(User, HttpStatus.OK);
+		return ResponseEntity.ok(User);
 
 	}
 
-	@GetMapping("/users/email/{email}")
-	public ResponseEntity<UserDto> getUserByEmail(@PathVariable String email) throws Exception {
+	@GetMapping("/api/users")
+	public ResponseEntity<List<User>> getUsers() {
+
+		List<User> users = userService.getAllUsers();
+		return ResponseEntity.ok(users);
+
+	}
+
+	@GetMapping("/api/users/email/{email}")
+	public ResponseEntity<User> getUserByEmail(@PathVariable String email) throws Exception {
 
 		return ResponseEntity.ok(userService.findUserByEmail(email));
 	}
 
-	@PutMapping("/users/follow/{userId1}/{userId2}")
-	public ResponseEntity<UserDto> followUserHandler(@PathVariable Integer userId1, @PathVariable Integer userId2)
+	@PutMapping("/api/users/follow/{userId1}/{userId2}")
+	public ResponseEntity<User> followUserHandler(@PathVariable Integer userId1, @PathVariable Integer userId2)
 			throws Exception {
 
-		UserDto userDto = userService.followUser(userId1, userId2);
+		User User = userService.followUser(userId1, userId2);
 
-		return ResponseEntity.ok(userDto);
+		return ResponseEntity.ok(User);
 	}
 
-	@PutMapping("/users/{userId}")
-	public ResponseEntity<UserDto> updateUser(@RequestBody UserDto user, @PathVariable("userId") Integer id)
+	@PutMapping("/api/users/{userId}")
+	public ResponseEntity<User> updateUser(@RequestBody User user, @PathVariable("userId") Integer id)
 			throws Exception {
 
-		UserDto updatedUser = userService.updateUser(user, id);
+		User updatedUser = userService.updateUser(user, id);
 
 		return ResponseEntity.ok(updatedUser);
 
 	}
 
-	@GetMapping("/users/search")
-	public ResponseEntity<List<UserDto>> searchUser(@RequestParam("query") String query) {
+	@GetMapping("/api/users/search")
+	public ResponseEntity<List<User>> searchUser(@RequestParam("query") String query) {
 
-		List<UserDto> usersDto = userService.searchUser(query);
+		List<User> users = userService.searchUser(query);
 
-		return ResponseEntity.ok(usersDto);
+		return ResponseEntity.ok(users);
 	}
 
-	@DeleteMapping("/users/delete/{userId}")
+	@DeleteMapping("/api/users/delete/{userId}")
 	public ResponseEntity<String> deleteUser(@PathVariable Integer userId) throws Exception {
 		userService.deleteUser(userId);
 

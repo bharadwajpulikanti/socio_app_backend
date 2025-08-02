@@ -1,8 +1,0 @@
-package com.media.service;
-
-import com.media.models.Post;
-
-public interface PostService {
-
-	Post createNewPost(Post post, Integer userId) throws Exception;
-}

@@ -25,7 +25,6 @@ public class Post {
 	private String video;
 
 	@ManyToOne
-	// @JsonManagedReference
 	private User user;
 
 	@OneToMany
