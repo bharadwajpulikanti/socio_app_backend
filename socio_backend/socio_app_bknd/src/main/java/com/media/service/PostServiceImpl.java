@@ -36,7 +36,6 @@ public class PostServiceImpl implements PostService {
 
 		Post post = postRepository.save(newPost);
 		return post;
-
 	}
 
 	@Override

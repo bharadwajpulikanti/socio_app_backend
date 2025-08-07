@@ -22,4 +22,6 @@ public interface UserService {
 
 	public String deleteUser(Integer userId) throws Exception;
 
+	public User findUserByJwt(String jwt);
+
 }

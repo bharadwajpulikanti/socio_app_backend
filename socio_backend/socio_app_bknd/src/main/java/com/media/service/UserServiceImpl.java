@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.media.config.JwtProvider;
 import com.media.models.User;
 import com.media.repository.UserRepository;
 
@@ -64,27 +65,27 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User followUser(Integer userId1, Integer userId2) throws Exception {
+	public User followUser(Integer reqUserId, Integer userId2) throws Exception {
 
-		User user1 = findUserById(userId1);
+		User reqUser = findUserById(reqUserId);
 		User user2 = findUserById(userId2);
 
-		if (user2.getFollowers().contains(user1.getId())) {
-			user2.getFollowers().remove(user1.getId());
+		if (user2.getFollowers().contains(reqUser.getId())) {
+			user2.getFollowers().remove(reqUser.getId());
 		} else {
-			user2.getFollowers().add(user1.getId());
+			user2.getFollowers().add(reqUser.getId());
 		}
 
-		if (user1.getFollowings().contains(user2.getId())) {
-			user1.getFollowings().remove(user2.getId());
+		if (reqUser.getFollowings().contains(user2.getId())) {
+			reqUser.getFollowings().remove(user2.getId());
 		} else {
-			user1.getFollowings().add(user2.getId());
+			reqUser.getFollowings().add(user2.getId());
 		}
 
-		userRepository.save(user1);
+		userRepository.save(reqUser);
 		userRepository.save(user2);
 
-		return user1;
+		return reqUser;
 	}
 
 	@Override
@@ -110,6 +111,9 @@ public class UserServiceImpl implements UserService {
 		if (user.getPassword() != null) {
 			oldUser.setPassword(user.getPassword());
 		}
+		if (user.getGender() != null) {
+			oldUser.setGender(user.getGender());
+		}
 
 		User updatedUser = userRepository.save(oldUser);
 		return updatedUser;
@@ -134,6 +138,15 @@ public class UserServiceImpl implements UserService {
 		userRepository.deleteById(userId);
 
 		return "user deleted successfully with id " + userId;
+	}
+
+	@Override
+	public User findUserByJwt(String jwt) {
+
+		String email = JwtProvider.getEmailFromJwtToken(jwt);
+		Optional<User> user = userRepository.findByEmail(email);
+
+		return user.get();
 	}
 
 }
