@@ -1,0 +1,23 @@
+package com.media.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.media.models.Message;
+import com.media.service.MessageService;
+import com.media.service.UserService;
+
+@RestController
+public class MessageController {
+
+	@Autowired
+	private MessageService messageService;
+
+	@Autowired
+	private UserService userService;
+
+	public Message createMessage() {
+
+		return null;
+	}
+}

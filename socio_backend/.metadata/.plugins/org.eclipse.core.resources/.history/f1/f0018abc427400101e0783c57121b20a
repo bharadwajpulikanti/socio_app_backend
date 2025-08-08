@@ -1,0 +1,8 @@
+package com.media.service;
+
+import com.media.models.Message;
+
+public interface MessageService {
+
+	public Message createMessage(Integer userId, Integer chatId,Chat chat);
+}

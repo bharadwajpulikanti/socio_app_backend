@@ -1,0 +1,11 @@
+package com.media.models;
+
+import jakarta.persistence.Entity;
+import lombok.NoArgsConstructor;
+
+@Entity
+@Data
+@NoArgsConstructor
+public class Chat {
+
+}

@@ -1,0 +1,44 @@
+package com.media.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.media.models.Chat;
+import com.media.models.User;
+import com.media.request.CreateChatRequest;
+import com.media.service.ChatService;
+import com.media.service.UserService;
+
+@RestController
+public class ChatController {
+
+	@Autowired
+	private ChatService chatService;
+
+	@Autowired
+	private UserService userService;
+
+	@PostMapping("/api/chats")
+	public Chat createChat(@RequestBody CreateChatRequest req) {
+
+		Chat chat = chatService.createChat(req.getReqUser(), req.getUser2());
+
+		return chat;
+	}
+
+	@GetMapping("/api/chats")
+	public List<Chat> findUsersChat(@RequestHeader("Authorization") String jwt) {
+
+		User user = userService.findUserByJwt(jwt);
+		List<Chat> chat = chatService.findUsersChat(user.getId());
+
+		return chat;
+	}
+
+}

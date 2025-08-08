@@ -1,0 +1,9 @@
+package com.media.request;
+
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+public class CreateChatRequest {
+
+}

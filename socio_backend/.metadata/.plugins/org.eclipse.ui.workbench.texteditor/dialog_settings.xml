@@ -10,6 +10,7 @@
 		<item key="isRegEx" value="false"/>
 		<item key="replaceBarOpen" value="true"/>
 		<list key="findhistory">
+			<item value="Chat chat = chatService.findChatById(chatId);"/>
 			<item value="Post"/>
 			<item value="UserRepository"/>
 			<item value="userRepository"/>

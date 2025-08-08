@@ -1,0 +1,17 @@
+package com.media.repository;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.query.Param;
+
+import com.media.models.Chat;
+import com.media.models.User;
+
+public interface ChatRepository extends JpaRepository<Chat, Integer> {
+
+	public List<Chat> findByUsersId(Integer userId);
+
+	public Chat findChatByUsersId(@Param("user") User user, @Param("reqUser") User reqUser);
+
+}

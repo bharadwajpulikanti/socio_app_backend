@@ -1,0 +1,10 @@
+package com.media.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.media.models.Message;
+
+public interface MessageRepository extends JpaRepository<Message, Integer> {
+
+	public List<Message> findByChatId(Integer chatId);
+}

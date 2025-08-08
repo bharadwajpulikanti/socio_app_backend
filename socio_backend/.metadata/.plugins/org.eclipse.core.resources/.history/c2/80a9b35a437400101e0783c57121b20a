@@ -1,0 +1,29 @@
+package com.media.service;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.media.models.Chat;
+import com.media.models.Message;
+import com.media.models.User;
+import com.media.repository.MessageRepository;
+
+@Service
+public class MessageServiceImpl implements MessageService {
+
+	private MessageRepository messageRepository;
+
+	@Override
+	public Message createMessage(User user, Integer chatId, Chat chat) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Message> findChatsMessages(Integer chatId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

@@ -1,0 +1,14 @@
+package com.media.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.media.service.ChatService;
+
+@RestController
+public class ChatController {
+
+	@Autowired
+	private ChatService chatService;
+
+}
