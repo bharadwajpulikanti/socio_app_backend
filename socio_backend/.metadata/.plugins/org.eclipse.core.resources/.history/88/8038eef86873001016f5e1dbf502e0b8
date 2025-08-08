@@ -1,0 +1,38 @@
+package com.media.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.media.models.Reels;
+import com.media.models.User;
+import com.media.repository.ReelsRepository;
+
+public class ReelsServiceImpl implements ReelsService {
+
+	@Autowired
+	private ReelsRepository reelsRepository;
+	
+	@Autowired
+	private UserService userService;
+
+	@Override
+	public Reels createReel(Reels reel, User user) {
+		
+		
+		return null;
+	}
+
+	@Override
+	public List<Reels> findAllReels() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Reels> findUsersReel(Integer userId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

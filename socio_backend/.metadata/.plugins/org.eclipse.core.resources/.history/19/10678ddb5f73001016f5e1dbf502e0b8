@@ -1,0 +1,8 @@
+package com.media.service;
+
+import com.media.models.Reels;
+
+public interface ReelsService {
+
+	public Reels createReels
+}

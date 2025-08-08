@@ -1,0 +1,27 @@
+package com.media.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.media.models.Comment;
+import com.media.service.CommentService;
+import com.media.service.UserService;
+
+@RestController
+public class CommentController {
+
+	@Autowired
+	private CommentService commentService;
+
+	@Autowired
+	private UserService userService;
+
+	public Comment createCommnet(@RequestBody Comment comment, @RequestHeader("Authorization") String jwt) {
+		
+		User user = userService.findUserByJwt(jwt);
+
+		return null;
+	}
+}

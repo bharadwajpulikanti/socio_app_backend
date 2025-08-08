@@ -1,0 +1,5 @@
+package com.media.service;
+
+public class StoryServiceImpl implements StoryService {
+
+}

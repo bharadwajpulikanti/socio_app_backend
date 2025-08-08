@@ -1,0 +1,11 @@
+package com.media.controller;
+
+import org.springframework.web.bind.annotation.RestController;
+
+import com.media.service.CommentService;
+
+@RestController
+public class CommentController {
+	
+	private CommentService commentService;
+}

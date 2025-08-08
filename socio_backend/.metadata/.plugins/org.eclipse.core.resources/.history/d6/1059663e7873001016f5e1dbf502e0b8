@@ -1,0 +1,33 @@
+package com.media.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.media.models.Story;
+import com.media.models.User;
+import com.media.repository.StoryRepository;
+
+@Service
+public class StoryServiceImpl implements StoryService {
+
+	@Autowired
+	private StoryRepository storyRepository;
+
+	@Override
+	public Story createStory(Story story, User user) {
+		
+		Story createStory = new Story();
+		cre
+		
+		return null;
+	}
+
+	@Override
+	public List<Story> findStoryByUserId(Integer userId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

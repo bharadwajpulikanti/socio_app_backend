@@ -1,0 +1,31 @@
+package com.media.service;
+
+import java.util.List;
+
+import com.media.models.Reels;
+import com.media.models.User;
+import com.media.repository.ReelsRepository;
+
+public class ReelsServiceImpl implements ReelsService {
+
+	private ReelsRepository reelsReposiotry;
+
+	@Override
+	public Reels createReel(Reels reel, User user) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Reels> findAllReels() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Reels> findUsersReel(Integer userId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

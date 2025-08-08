@@ -1,0 +1,31 @@
+package com.media.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.media.models.Comment;
+import com.media.repository.CommentRepository;
+
+public class CommentServiceImpl implements CommentService {
+
+	@Autowired
+	private CommentRepository commentRepository;
+
+	@Override
+	public Comment createComment(Comment comment, Integer postId, Integer userId) {
+
+		return null;
+	}
+
+	@Override
+	public Comment findCommentById(Integer commentId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Comment likeComment(Integer commentId, Integer userId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

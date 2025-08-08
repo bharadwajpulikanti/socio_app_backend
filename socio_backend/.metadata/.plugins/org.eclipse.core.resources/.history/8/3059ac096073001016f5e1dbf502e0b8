@@ -1,0 +1,9 @@
+package com.media.service;
+
+import com.media.models.Reels;
+import com.media.models.User;
+
+public interface ReelsService {
+
+	public Reels createReel(Reels reel, User user);
+}

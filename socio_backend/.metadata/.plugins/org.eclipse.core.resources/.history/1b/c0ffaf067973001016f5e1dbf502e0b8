@@ -1,0 +1,10 @@
+package com.media.controller;
+
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class StoryController {
+	
+	private StoryService storyService;
+
+}

@@ -1,0 +1,12 @@
+package com.media.service;
+
+import java.util.List;
+
+import com.media.models.Story;
+
+public interface StoryService {
+
+	public Story createStory(Story story, Integer userId);
+	public List<Story> findStoryByUserId(Integer userId);
+
+}

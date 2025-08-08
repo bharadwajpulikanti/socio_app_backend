@@ -1,0 +1,9 @@
+package com.media.service;
+
+import com.media.models.Story;
+
+public interface StoryService {
+
+	public Story createStory(Story story, Integer userId);
+
+}

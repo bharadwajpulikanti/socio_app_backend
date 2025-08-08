@@ -1,0 +1,22 @@
+package com.media.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.media.models.Story;
+import com.media.service.StoryService;
+
+@RestController
+public class StoryController {
+
+	@Autowired
+	private StoryService storyService;
+
+	public Story createStory(@RequestBody Story story, @RequestHeader("Authorization") String jwt) {
+
+		return story;
+	}
+
+}
