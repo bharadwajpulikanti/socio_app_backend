@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.media.exceptions.UserException;
 import com.media.models.User;
 import com.media.repository.UserRepository;
 import com.media.service.UserService;
@@ -27,7 +28,7 @@ public class UserController {
 	UserService userService;
 
 	@GetMapping("/api/users/{userid}")
-	public ResponseEntity<User> getUserById(@PathVariable("userid") Integer id) throws Exception {
+	public ResponseEntity<User> getUserById(@PathVariable("userid") Integer id) throws UserException {
 		User User = userService.findUserById(id);
 
 		// return new ResponseEntity<User>(User, HttpStatus.OK);
@@ -44,14 +45,14 @@ public class UserController {
 	}
 
 	@GetMapping("/api/users/email/{email}")
-	public ResponseEntity<User> getUserByEmail(@PathVariable String email) throws Exception {
+	public ResponseEntity<User> getUserByEmail(@PathVariable String email) throws UserException {
 
 		return ResponseEntity.ok(userService.findUserByEmail(email));
 	}
 
 	@PutMapping("/api/users/follow/{userId2}")
 	public ResponseEntity<User> followUserHandler(@RequestHeader("Authorization") String jwt,
-			@PathVariable Integer userId2) throws Exception {
+			@PathVariable Integer userId2) throws UserException {
 
 		User reqUser = userService.findUserByJwt(jwt);
 		User User = userService.followUser(reqUser.getId(), userId2);
@@ -61,7 +62,7 @@ public class UserController {
 
 	@PutMapping("/api/users")
 	public ResponseEntity<User> updateUser(@RequestHeader("Authorization") String jwt, @RequestBody User user)
-			throws Exception {
+			throws UserException {
 
 		User reqUser = userService.findUserByJwt(jwt);
 		User updatedUser = userService.updateUser(user, reqUser.getId());
@@ -79,7 +80,7 @@ public class UserController {
 	}
 
 	@DeleteMapping("/api/users/delete/{userId}")
-	public ResponseEntity<String> deleteUser(@PathVariable Integer userId) throws Exception {
+	public ResponseEntity<String> deleteUser(@PathVariable Integer userId) throws UserException {
 		userService.deleteUser(userId);
 
 		return ResponseEntity.ok("Employee Deleted");

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.media.config.JwtProvider;
+import com.media.exceptions.UserException;
 import com.media.models.User;
 import com.media.repository.UserRepository;
 
@@ -36,13 +37,13 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User findUserById(Integer userId) throws Exception {
+	public User findUserById(Integer userId) throws UserException {
 		Optional<User> user = userRepository.findById(userId);
 
 		if (user.isPresent())
 			return user.get();
 
-		throw new Exception("User not exists with userid " + userId);
+		throw new UserException("User not exists with userid " + userId);
 	}
 
 	@Override
@@ -54,18 +55,18 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User findUserByEmail(String email) throws Exception {
+	public User findUserByEmail(String email) throws UserException {
 
 		Optional<User> user = userRepository.findByEmail(email);
 
 		if (user.isEmpty())
-			throw new Exception("User not exists with email " + email);
+			throw new UserException("User not exists with email " + email);
 
 		return user.get();
 	}
 
 	@Override
-	public User followUser(Integer reqUserId, Integer userId2) throws Exception {
+	public User followUser(Integer reqUserId, Integer userId2) throws UserException {
 
 		User reqUser = findUserById(reqUserId);
 		User user2 = findUserById(userId2);
@@ -89,12 +90,12 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User updateUser(User user, Integer id) throws Exception {
+	public User updateUser(User user, Integer id) throws UserException {
 
 		Optional<User> user1 = userRepository.findById(id);
 
 		if (user1.isEmpty())
-			throw new Exception("User not exists with userid " + id);
+			throw new UserException("User not exists with userid " + id);
 
 		User oldUser = user1.get();
 
@@ -129,11 +130,11 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public String deleteUser(Integer userId) throws Exception {
+	public String deleteUser(Integer userId) throws UserException {
 		Optional<User> user1 = userRepository.findById(userId);
 
 		if (user1.isEmpty())
-			throw new Exception("User not exists with userid " + userId);
+			throw new UserException("User not exists with userid " + userId);
 
 		userRepository.deleteById(userId);
 

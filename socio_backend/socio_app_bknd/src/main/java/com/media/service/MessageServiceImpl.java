@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.media.models.Chat;
 import com.media.models.Message;
 import com.media.models.User;
+import com.media.repository.ChatRepository;
 import com.media.repository.MessageRepository;
 
 @Service
@@ -16,6 +17,9 @@ public class MessageServiceImpl implements MessageService {
 
 	@Autowired
 	private MessageRepository messageRepository;
+	
+	@Autowired
+	private ChatRepository chatRepository;
 
 	@Autowired
 	private ChatService chatService;
@@ -32,8 +36,14 @@ public class MessageServiceImpl implements MessageService {
 		newMessage.setImage(message.getImage());
 		newMessage.setUser(user);
 		newMessage.setTimeStamp(LocalDateTime.now());
+		
+		Message savedMessage = messageRepository.save(newMessage);
+		
+		chat.getMessages().add(savedMessage);
+		
+		chatRepository.save(chat);
 
-		return messageRepository.save(newMessage);
+		return savedMessage;
 	}
 
 	@Override
